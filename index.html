@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 1198px;
+            height: 834px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/NoData_1.js"></script>
+        <script src="data/HDI2010_2.js"></script>
+        <script src="data/HDI2018_3.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-100.01948947128528,-179.92499315825177],[90.0448409751302,179.9846461365568]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_ESRIGraylight_0 = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_ESRIGraylight_0;
+        map.addLayer(layer_ESRIGraylight_0);
+        function pop_NoData_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? Autolinker.link(feature.properties['fid'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NAME_LONG</th>\
+                        <td>' + (feature.properties['NAME_LONG'] !== null ? Autolinker.link(feature.properties['NAME_LONG'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">POP_EST</th>\
+                        <td>' + (feature.properties['POP_EST'] !== null ? Autolinker.link(feature.properties['POP_EST'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GDP_MD_EST</th>\
+                        <td>' + (feature.properties['GDP_MD_EST'] !== null ? Autolinker.link(feature.properties['GDP_MD_EST'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">undp-hdi-table2 Table 2_Field7</th>\
+                        <td>' + (feature.properties['undp-hdi-table2 Table 2_Field7'] !== null ? Autolinker.link(feature.properties['undp-hdi-table2 Table 2_Field7'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">undp-hdi-table2 Table 2_Field17</th>\
+                        <td>' + (feature.properties['undp-hdi-table2 Table 2_Field17'] !== null ? Autolinker.link(feature.properties['undp-hdi-table2 Table 2_Field17'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">hdi2010</th>\
+                        <td>' + (feature.properties['hdi2010'] !== null ? Autolinker.link(feature.properties['hdi2010'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">hdi2018</th>\
+                        <td>' + (feature.properties['hdi2018'] !== null ? Autolinker.link(feature.properties['hdi2018'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        var pattern_NoData_1_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#000000',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 315
+        });
+        pattern_NoData_1_0.addTo(map);
+        function style_NoData_1_0() {
+            return {
+                pane: 'pane_NoData_1',
+                stroke: false,
+                fillOpacity: 1,
+                fillPattern: pattern_NoData_1_0,
+                interactive: true,
+            }
+        }
+        var pattern_NoData_1_1 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#000000',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_NoData_1_1.addTo(map);
+        function style_NoData_1_1() {
+            return {
+                pane: 'pane_NoData_1',
+                stroke: false,
+                fillOpacity: 1,
+                fillPattern: pattern_NoData_1_1,
+                interactive: true,
+            }
+        }
+        function style_NoData_1_2() {
+            return {
+                pane: 'pane_NoData_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_NoData_1');
+        map.getPane('pane_NoData_1').style.zIndex = 401;
+        map.getPane('pane_NoData_1').style['mix-blend-mode'] = 'normal';
+        var layer_NoData_1 = new L.geoJson.multiStyle(json_NoData_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_NoData_1',
+            layerName: 'layer_NoData_1',
+            pane: 'pane_NoData_1',
+            onEachFeature: pop_NoData_1,
+            styles: [style_NoData_1_0,style_NoData_1_1,style_NoData_1_2,]
+        });
+        bounds_group.addLayer(layer_NoData_1);
+        map.addLayer(layer_NoData_1);
+        function pop_HDI2010_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? Autolinker.link(feature.properties['fid'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NAME_LONG</th>\
+                        <td>' + (feature.properties['NAME_LONG'] !== null ? Autolinker.link(feature.properties['NAME_LONG'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">POP_EST</th>\
+                        <td>' + (feature.properties['POP_EST'] !== null ? Autolinker.link(feature.properties['POP_EST'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GDP_MD_EST</th>\
+                        <td>' + (feature.properties['GDP_MD_EST'] !== null ? Autolinker.link(feature.properties['GDP_MD_EST'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">undp-hdi-table2 Table 2_Field7</th>\
+                        <td>' + (feature.properties['undp-hdi-table2 Table 2_Field7'] !== null ? Autolinker.link(feature.properties['undp-hdi-table2 Table 2_Field7'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">undp-hdi-table2 Table 2_Field17</th>\
+                        <td>' + (feature.properties['undp-hdi-table2 Table 2_Field17'] !== null ? Autolinker.link(feature.properties['undp-hdi-table2 Table 2_Field17'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">hdi2010</th>\
+                        <td>' + (feature.properties['hdi2010'] !== null ? Autolinker.link(feature.properties['hdi2010'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">hdi2018</th>\
+                        <td>' + (feature.properties['hdi2018'] !== null ? Autolinker.link(feature.properties['hdi2018'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_HDI2010_2_0(feature) {
+            if (feature.properties['hdi2010'] >= 0.319222 && feature.properties['hdi2010'] <= 0.489786 ) {
+                return {
+                pane: 'pane_HDI2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,235,226,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['hdi2010'] >= 0.489786 && feature.properties['hdi2010'] <= 0.659922 ) {
+                return {
+                pane: 'pane_HDI2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,180,185,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['hdi2010'] >= 0.659922 && feature.properties['hdi2010'] <= 0.741446 ) {
+                return {
+                pane: 'pane_HDI2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,104,161,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['hdi2010'] >= 0.741446 && feature.properties['hdi2010'] <= 0.826629 ) {
+                return {
+                pane: 'pane_HDI2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,27,138,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['hdi2010'] >= 0.826629 && feature.properties['hdi2010'] <= 0.941714 ) {
+                return {
+                pane: 'pane_HDI2010_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(122,1,119,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_HDI2010_2');
+        map.getPane('pane_HDI2010_2').style.zIndex = 402;
+        map.getPane('pane_HDI2010_2').style['mix-blend-mode'] = 'normal';
+        var layer_HDI2010_2 = new L.geoJson(json_HDI2010_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_HDI2010_2',
+            layerName: 'layer_HDI2010_2',
+            pane: 'pane_HDI2010_2',
+            onEachFeature: pop_HDI2010_2,
+            style: style_HDI2010_2_0,
+        });
+        bounds_group.addLayer(layer_HDI2010_2);
+        map.addLayer(layer_HDI2010_2);
+        function pop_HDI2018_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? Autolinker.link(feature.properties['fid'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NAME_LONG</th>\
+                        <td>' + (feature.properties['NAME_LONG'] !== null ? Autolinker.link(feature.properties['NAME_LONG'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">POP_EST</th>\
+                        <td>' + (feature.properties['POP_EST'] !== null ? Autolinker.link(feature.properties['POP_EST'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GDP_MD_EST</th>\
+                        <td>' + (feature.properties['GDP_MD_EST'] !== null ? Autolinker.link(feature.properties['GDP_MD_EST'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">undp-hdi-table2 Table 2_Field7</th>\
+                        <td>' + (feature.properties['undp-hdi-table2 Table 2_Field7'] !== null ? Autolinker.link(feature.properties['undp-hdi-table2 Table 2_Field7'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">undp-hdi-table2 Table 2_Field17</th>\
+                        <td>' + (feature.properties['undp-hdi-table2 Table 2_Field17'] !== null ? Autolinker.link(feature.properties['undp-hdi-table2 Table 2_Field17'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">hdi2010</th>\
+                        <td>' + (feature.properties['hdi2010'] !== null ? Autolinker.link(feature.properties['hdi2010'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">hdi2018</th>\
+                        <td>' + (feature.properties['hdi2018'] !== null ? Autolinker.link(feature.properties['hdi2018'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_HDI2018_3_0(feature) {
+            if (feature.properties['hdi2018'] >= 0.376591 && feature.properties['hdi2018'] <= 0.535639 ) {
+                return {
+                pane: 'pane_HDI2018_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,235,226,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['hdi2018'] >= 0.535639 && feature.properties['hdi2018'] <= 0.700866 ) {
+                return {
+                pane: 'pane_HDI2018_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,180,185,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['hdi2018'] >= 0.700866 && feature.properties['hdi2018'] <= 0.768143 ) {
+                return {
+                pane: 'pane_HDI2018_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,104,161,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['hdi2018'] >= 0.768143 && feature.properties['hdi2018'] <= 0.856895 ) {
+                return {
+                pane: 'pane_HDI2018_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,27,138,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['hdi2018'] >= 0.856895 && feature.properties['hdi2018'] <= 0.953688 ) {
+                return {
+                pane: 'pane_HDI2018_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(122,1,119,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_HDI2018_3');
+        map.getPane('pane_HDI2018_3').style.zIndex = 403;
+        map.getPane('pane_HDI2018_3').style['mix-blend-mode'] = 'normal';
+        var layer_HDI2018_3 = new L.geoJson(json_HDI2018_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_HDI2018_3',
+            layerName: 'layer_HDI2018_3',
+            pane: 'pane_HDI2018_3',
+            onEachFeature: pop_HDI2018_3,
+            style: style_HDI2018_3_0,
+        });
+        bounds_group.addLayer(layer_HDI2018_3);
+        map.addLayer(layer_HDI2018_3);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'HDI2018<br /><table><tr><td style="text-align: center;"><img src="legend/HDI2018_3_0380540.png" /></td><td>0.38 - 0.54</td></tr><tr><td style="text-align: center;"><img src="legend/HDI2018_3_054071.png" /></td><td>0.54 - 0.7</td></tr><tr><td style="text-align: center;"><img src="legend/HDI2018_3_070772.png" /></td><td>0.7 - 0.77</td></tr><tr><td style="text-align: center;"><img src="legend/HDI2018_3_0770863.png" /></td><td>0.77 - 0.86</td></tr><tr><td style="text-align: center;"><img src="legend/HDI2018_3_0860954.png" /></td><td>0.86 - 0.95</td></tr></table>': layer_HDI2018_3,'HDI2010<br /><table><tr><td style="text-align: center;"><img src="legend/HDI2010_2_0320490.png" /></td><td>0.32 - 0.49</td></tr><tr><td style="text-align: center;"><img src="legend/HDI2010_2_0490661.png" /></td><td>0.49 - 0.66</td></tr><tr><td style="text-align: center;"><img src="legend/HDI2010_2_0660742.png" /></td><td>0.66 - 0.74</td></tr><tr><td style="text-align: center;"><img src="legend/HDI2010_2_0740833.png" /></td><td>0.74 - 0.83</td></tr><tr><td style="text-align: center;"><img src="legend/HDI2010_2_0830944.png" /></td><td>0.83 - 0.94</td></tr></table>': layer_HDI2010_2,'<img src="legend/NoData_1.png" /> No Data': layer_NoData_1,"ESRI Gray (light)": layer_ESRIGraylight_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
